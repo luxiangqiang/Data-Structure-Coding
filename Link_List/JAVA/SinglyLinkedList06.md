@@ -1,4 +1,4 @@
-```
+```java
 package easy_test;
 
 /**
@@ -189,7 +189,8 @@ public class SinglyLinkedList {
 	    if (p == head) {
 	      //设置下一节点为头结点(所说的头结点为第二段)
 	      head = head.next;
-	      //问题:是否可以return？
+	      //问题:是否可以return？（可以return）
+	      return;
 	    }
 
 	    //将存储头结点的地址赋值 q
