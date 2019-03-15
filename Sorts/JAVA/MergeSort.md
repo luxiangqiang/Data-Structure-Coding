@@ -3,6 +3,8 @@ package com.test.xiaolu;
 
 
 /**
+ * 2019/3/15
+ * 公众号: 「一个不甘平凡的码农」
  * 归并排序
  * @author 小鹿
  *
@@ -18,6 +20,7 @@ public class MergeSort {
 	}
 	
 	/**
+	 * 时间：2019/3/15
 	 * 功能:递归分治数据
 	 * @param a 要分治的数组
 	 * @param p	数组起始位置
@@ -40,6 +43,7 @@ public class MergeSort {
 	}
 	
 	/**
+	 * 时间：2019/3/15 
 	 * 功能: 合并 mergr
 	 * @param a 要合并的数组
 	 * @param p 数组起始的下标
