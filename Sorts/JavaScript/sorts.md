@@ -17,24 +17,15 @@
  * 2)内循环每次冒泡的比较次数，每冒泡比较次数都 -1
  * 3)冒泡优化
  */
-var a = [1,3,8,2,5];	
-console.log(a);
 var flag = false;
-bubblesort(a,5);
-//冒泡排序
-function bubblesort(a,n){
-    //判断数组是否有数据
-    if(n<=1) return;
-    //外循环
+const bubblesort = (a) =>{
+    if(a.length < 1) return;
     for(let i = 0;i < a.length;i++){
-        //内循环
-        for(let j = 0;j < n-1-i;j++){
+        for(let j = 0;j < a.length-1-i;j++){
             if(a[j]>=a[j+1]){
-                //内循环
                 let temp = a[j];
                 a[j] = a[j+1];
                 a[j+1] = temp;
-                //冒泡优化
                 flag = true;
             }
         }
@@ -43,8 +34,6 @@ function bubblesort(a,n){
         }
     }
 }
-//打印冒泡排序结果
-console.log(a);
 
   /**
     * 时间:2019/3/14
@@ -58,28 +47,68 @@ console.log(a);
     * @param a:数组
     * @param n:数组的大小
     */
-insertsort(a,5);
 //插入排序
-function insertsort(a,n){
-    //判断数组是否有数据
-    if(n<=1) return;
-    //外循环（未排序区间）
-    for(var i = 1;i < n;i++){
-        //未排序区间第一个数据
-        var value = a[i];
-        //排序区间倒序遍历比较
+const insertsort = (a) => {
+    if(a.length <= 1) return;
+    for(let i = 1;i < a.length;i++){
+        let value = a[i];
         for (var j = i-1; j >= 0; --j) {
             if (a[j] > value) {
-                a[j+1] = a[j];  
+                a[j+1] = a[j];  // 数据移动
             } else {
                 break;
             }
         }
-        //j指针指向排序区间比临时temp数据小的数据，所以插入到该数据前方
-        a[j+1] = value; 
+        a[j+1] = value; // 插入数据
     }
-    //打印插入排序结果
-    console.log(a);
 }
+
+
+ /**
+    * 时间:2019/3/15
+    * 功能:选择排序
+    * 边界条件:
+    * 1)判断数组是否有数据
+    * 算法思路:
+    * 1）外循环 0 -> n-1 设定最小数据
+    * 2）内循环 i+1->n 范围数据作比较选出最小数据
+    * 3）如果当前最小，则继续循环
+    * 4）做交换
+    * @param a:数组
+    * @param n:数组的大小
+    */
+const selectSort = (a) => {
+    //如果数组为空,结束排序
+    if (a.length <= 1) return;
+    //外循环，i 用来标记未排序区间的第一个元素，将其假设为未排序区间的最小值
+    for(var i = 0; i < a.length-1; i++){
+        var minIndex = i;
+        for(var j = i+1;j < a.length;j++){
+            if(a[j] < a[minIndex]){
+                minIndex = j;
+            }
+        }
+        if(minIndex == i){
+            continue;
+        }
+        var temp = a[i];
+        a[i] = a[minIndex];
+        a[minIndex] = temp;
+    }
+}
+
+//测试
+//冒泡排序
+var a = [2,5,8,1,3,9];
+bubblesort(a);
+console.log(a);
+//插入排序
+var a = [6,9,3,0,1,8]
+insertsort(a);
+console.log(a);
+//选择排序
+var a = [12,5,3,16,5];
+selectSort(a);
+console.log(a);
 ```
 
