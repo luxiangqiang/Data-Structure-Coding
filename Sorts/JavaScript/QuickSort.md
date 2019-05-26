@@ -18,21 +18,18 @@
 * @param end    数组终止位置
 */
 const quickSort = (arr,start,end) => {
-    //递归终止条件
-    if(left < right){
+    // 终止条件
+    if(start >= end) return;
 
-        //区分点每次选择最后元素
-        let pivot = right;
+    //区分点每次选择最后元素
+    let pivot = end;
 
-        //获取区分点
-        let partitionIndex = partition(arr,pivot,start,end)
+    //获取区分点
+    let partitionIndex = partition(arr,pivot,start,end)
 
-        //区分点两端开始递归
-        //左递归
-        quickSort(arr,left,partitionIndex - 1 < start ? start : partitionIndex - 1)
-        //右递归
-        quickSort(arr,partitionIndex + 1 > end ? end : partitionIndex + 1,end)
-    }
+    //区分点两端开始递归
+    quickSort(arr,start,partitionIndex - 1)
+    quickSort(arr,partitionIndex + 1,end)
 }
 
 /**
