@@ -15,60 +15,59 @@
  * 1)对于重复数据怎么做处理？
  * @author 小鹿
  */
-		//递归
-        const quickSort = (arr,startIndex,endIndex,k)=>{
-            //判断索引值是否大于元素个数
-            if (k > endIndex) {
-                return -1;
-            }
-            //终止条件
-            if(startIndex < endIndex){
-               //区分点
-               let pivot = endIndex;
-                //获取区分点索引
-                let partitionIndex = partition(arr,pivot,startIndex,endIndex);
-				// 判断查找该下标存储的数是否为最大数据？
-                while(partitionIndex + 1 !== k){
-                    if(partitionIndex + 1 > k){
-                        quickSort(arr,startIndex,partitionIndex - 1)
-                    }else{
-                        quickSort(arr,partitionIndex + 1,endIndex)
-                    }
-                }
-                //返回该元素
-                return arr[partitionIndex];
-            }
-        }
+const largestKelement = (arr,start,end,k)=>{
+    // 判断 k 的范围
+    if(k < 1 || k > arr.length){
+        return false;
+    }
+    // 终止条件
+    if(start > end) return;
+    // 区分点
+    let pivot = end;
+    // 求中间下标
+    let middleIndex = partition(arr,start,end,pivot);
+    console.log(arr)
+    if(middleIndex + 1 == k){
+        console.log("第"+k+"大数据为:"+arr[middleIndex]);
+        return;
+    }else if(middleIndex + 1 < k){
+        largestKelement(arr,middleIndex+1,end,k);
+    }else{
+        largestKelement(arr,start,middleIndex-1,k);
+    }
+}       
+// 区分点
+const partition = (arr,start,end,pivot)=>{
+    // 存储中间点
+    let pivotVal = arr[pivot];
+    // 交换点
+    let startIndex = start;
+    // 调整数据
+    for(let i = startIndex;i < end;++i){
+        if(arr[i] < pivotVal){
+            swap(arr,i,startIndex);
+            startIndex++;
+        }    
+    }
+    swap(arr,startIndex,pivot);
+    return startIndex;
+}
+// 交换
+const swap = (arr,x,y)=>{
+    if (x === y) return;
+    let temp  = arr[x];
+    arr[x] = arr[y];
+    arr[y] = temp;
+}
 
-        const partition = (arr,pivot,startIndex,endIndex)=>{
-            //取区分点的值
-            let pivotVal = arr[pivot];
-            //定义指针
-            let swapIndex = startIndex;
-            for(let i = startIndex; i < endIndex; i++){
-                if(arr[i] > pivotVal){
-                    swap(arr,i,swapIndex)
-                    swapIndex++;
-                }
-            }
-            swap(arr,swapIndex,pivot)
-            return swapIndex;
-        }
-
-        const swap = (arr,i,j)=>{
-            if (i === j) return;
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-
-        const testArr = [1,2,3,3,4]
-        let i = 0
-        while(i < 5){
-            testArr.push(Math.floor(Math.random()*10));
-            i++;
-        }
-        console.log(quickSort(testArr,0,testArr.length - 1,1));
-        console.log("Quick:"+testArr)
+// 测试
+const testArr = []
+let i = 0
+while(i < 5){
+    testArr.push(Math.floor(Math.random()*10));
+    i++;
+}
+console.log("Quick:"+testArr)
+largestKelement(testArr,0,testArr.length - 1,3);
 ```
 
